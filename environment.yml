@@ -1,0 +1,26 @@
+name: rag
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    - langchain
+    - langchain-community
+    - langchain-experimental
+    - langchain-openai
+    - openai
+    - sentence-transformers
+    - beautifulsoup4
+    - unstructured
+    - python-docx
+    - pypdf
+    - faiss-cpu
+    - pysimilar
+    - whoosh
+    - tiktoken
+    - transformers
+    - huggingface-hub
+    - python-dotenv
+    - hydra-core
+    - streamlit

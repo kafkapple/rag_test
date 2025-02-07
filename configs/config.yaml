@@ -1,0 +1,48 @@
+app:
+  project_name: "RAG Pipeline Demo"
+  debug: true
+
+paths:
+  data_dir: "./data"
+  index_dir: "./faiss_index"
+
+# splitter 유형 선택: "character", "recursive", "semantic"
+splitter:
+  type: "recursive"
+  chunk_size: 1000
+  chunk_overlap: 200
+
+embeddings:
+  type: "openai"          # "openai", "huggingface", etc
+  openai_model: "text-embedding-ada-002"
+
+vectorstore:
+  type: "faiss"           # "faiss", "chroma"
+  persist_dir: "./vector_store"
+
+retriever:
+  type: "ensemble"        # "bm25", "faiss", "ensemble"
+  top_k: 3
+
+llm:
+  model: "gpt-3.5-turbo"
+  temperature: 0.0
+
+prompt:
+  style: "default"
+
+
+crawler:
+  start_url: "https://huggingface.co/docs"
+  max_depth: 2
+  allowed_domains:
+    - "huggingface.co"
+  exclude_paths:
+    - "/models/"
+    - "/datasets/"
+    - "/spaces/"
+    - "/blog/"
+  max_pages: 50
+
+
+#crawler 항목 예시: start_url(시작 URL), max_depth(재귀 깊이), allowed_domain(크롤 범위 제한).
