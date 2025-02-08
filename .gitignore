@@ -1,4 +1,4 @@
 .env
 /data
-/vector_store
+/vectorstore
 __pycache__
