@@ -2,27 +2,29 @@
 
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from typing import Optional
 import os
 
-
-def get_embedding_model(
-    etype: str = "openai",
-    openai_model: str = "text-embedding-ada-002"
-):
-    """
-    etype: "openai" or "huggingface"
-    """
-    if etype == "openai":
-        # OpenAI API 키 체크
-        if not os.getenv("OPENAI_API_KEY"):
-            raise ValueError(
-                "OpenAI API key not found. Please set OPENAI_API_KEY environment variable."
-            )
-        return OpenAIEmbeddings(model=openai_model)
-    elif etype == "huggingface":
+def get_embedding_model(provider: str, model_id: str):
+    """임베딩 모델을 생성합니다."""
+    
+    if provider == "huggingface":
+        # HuggingFace 임베딩 설정
+        model_kwargs = {
+            'device': 'cuda',
+            'token': os.getenv("HUGGINGFACE_TOKEN")  # token을 model_kwargs에 포함
+        }
+        encode_kwargs = {
+            'normalize_embeddings': True
+        }
         return HuggingFaceEmbeddings(
-            model_name="sentence-transformers/all-MiniLM-L6-v2"
+            model_name=model_id,
+            model_kwargs=model_kwargs,
+            encode_kwargs=encode_kwargs
+        )
+    elif provider == "openai":
+        return OpenAIEmbeddings(
+            model=model_id,
+            openai_api_key=os.getenv("OPENAI_API_KEY")
         )
     else:
-        raise ValueError(f"Unknown embedding type: {etype}")
+        raise ValueError(f"지원하지 않는 임베딩 제공자입니다: {provider}")
