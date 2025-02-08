@@ -5,38 +5,49 @@ app:
 paths:
   data_dir: "./data"
   index_dir: "./faiss_index"
+  pdf_path: "./data/grid.pdf"
 
 # splitter 유형 선택: "character", "recursive", "semantic"
 splitter:
   type: "recursive"
-  chunk_size: 1000
-  chunk_overlap: 200
+  chunk_size: 300
+  chunk_overlap: 30
 
 embeddings:
-  type: "openai"          # "openai", "huggingface", etc
-  openai_model: "text-embedding-ada-002"
+  provider: "huggingface"  # huggingface 또는 openai
+  model_configs:
+    huggingface:
+      model_id: "sentence-transformers/all-MiniLM-L6-v2"
+    openai:
+      model_id: "text-embedding-ada-002"
 
 vectorstore:
   type: "faiss"           # "faiss", "chroma"
-  persist_dir: "./vector_store"
+  persist_dir: "./vectorstore"
 
 retriever:
   type: "ensemble"        # "bm25", "faiss", "ensemble"
-  top_k: 3
+  top_k: 2
 
 llm:
-  model: "gpt-3.5-turbo"
-  temperature: 0.0
+  provider: "huggingface"
+  model_configs:
+    huggingface:
+      model_id: "Qwen/Qwen1.5-0.5B-Chat"
+      temperature: 0.3
+    openai:
+      model_id: "gpt-3.5-turbo"
+      temperature: 0.3
 
 prompt:
   style: "default"
 
 
 crawler:
-  start_url: "https://huggingface.co/docs"
-  max_depth: 2
+  start_url: "https://wikidocs.net/book/14314"
+  max_depth: 3
   allowed_domains:
-    - "huggingface.co"
+    - "wikidocs.net"
   exclude_paths:
     - "/models/"
     - "/datasets/"

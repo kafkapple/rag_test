@@ -21,3 +21,14 @@
    ```bash
    conda env create -f environment.yml
    conda activate my-rag-project
+   ```
+
+2. 환경 변수 설정
+   - 프로젝트 루트에 `.env` 파일을 생성하고 다음 내용을 추가하세요:
+   ```
+   OPENAI_API_KEY=your-api-key-here
+   ```
+   - 또는 터미널에서 직접 설정:
+   ```bash
+   export OPENAI_API_KEY=your-api-key-here
+   ```

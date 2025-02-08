@@ -1,26 +1,30 @@
 name: rag
 channels:
   - defaults
+  - conda-forge
+  - pytorch
 dependencies:
   - python=3.10
   - pip
+  - faiss-cpu
+  - pytorch
   - pip:
     - langchain
     - langchain-community
-    - langchain-experimental
     - langchain-openai
     - openai
     - sentence-transformers
+    - streamlit
+    - python-dotenv
+    - hydra-core
+    - faiss-cpu
+    - tiktoken
+    - transformers
+  - pip:
     - beautifulsoup4
     - unstructured
     - python-docx
     - pypdf
-    - faiss-cpu
     - pysimilar
     - whoosh
-    - tiktoken
-    - transformers
-    - huggingface-hub
-    - python-dotenv
-    - hydra-core
-    - streamlit
+    - accelerate>=0.26.0
