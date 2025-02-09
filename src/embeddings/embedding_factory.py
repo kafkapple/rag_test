@@ -10,8 +10,8 @@ def get_embedding_model(provider: str, model_id: str):
     if provider == "huggingface":
         # HuggingFace 임베딩 설정
         model_kwargs = {
-            'device': 'cuda',
-            'token': os.getenv("HUGGINGFACE_TOKEN")  # token을 model_kwargs에 포함
+            'device': 'cpu',  # CUDA 오류 방지를 위해 CPU 사용
+            'token': os.getenv("HUGGINGFACE_TOKEN")
         }
         encode_kwargs = {
             'normalize_embeddings': True

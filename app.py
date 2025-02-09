@@ -36,8 +36,11 @@ if not os.getenv("OPENAI_API_KEY"):
         "OPENAI_API_KEY가 설정되지 않았습니다. "
         ".env 파일을 확인하거나 환경 변수를 설정해주세요."
     )
-os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+
+# CUDA 메모리 설정 수정
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:512"  # expandable_segments 대신 max_split_size_mb 사용
 os.environ["HF_HOME"] = "./models/"
+
 # Streamlit 설정
 st.set_page_config(
     page_title="RAG Pipeline Demo",
@@ -332,6 +335,7 @@ def main():
         hf_llm_models = [
             "Qwen/Qwen1.5-0.5B-Chat",  # 0.5B 모델
             "Qwen/Qwen2.5-7B-Instruct",  # 1.8B 모델
+            "Bllossom/llama-3.2-Korean-Bllossom-3B"
         ]
         llm_model_id = st.selectbox(
             "Hugging Face 모델",

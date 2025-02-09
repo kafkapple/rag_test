@@ -5,7 +5,7 @@ app:
 paths:
   data_dir: "./data"
   index_dir: "./faiss_index"
-  pdf_path: "./data/grid.pdf"
+  pdf_path: "./data/all you need is attention.pdf"
 
 # splitter 유형 선택: "character", "recursive", "semantic"
 splitter:
@@ -33,7 +33,7 @@ llm:
   provider: "huggingface"
   model_configs:
     huggingface:
-      model_id: "Qwen/Qwen1.5-0.5B-Chat"
+      model_id: "Bllossom/llama-3.2-Korean-Bllossom-3B" #"Qwen/Qwen2.5-7B-Instruct"
       temperature: 0.3
     openai:
       model_id: "gpt-3.5-turbo"
@@ -44,7 +44,7 @@ prompt:
 
 
 crawler:
-  start_url: "https://wikidocs.net/book/14314"
+  start_url: "https://wikidocs.net/231393"
   max_depth: 3
   allowed_domains:
     - "wikidocs.net"
